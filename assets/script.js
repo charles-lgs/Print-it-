@@ -20,11 +20,28 @@ const slides = [
 
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
+const allDots = document.querySelectorAll(".dot");
+
+let defaultIndex = 0;
+
+// Function to update bullet points
+function dotUpdate() {
+  allDots.forEach((dot, index) => {
+    if (index === defaultIndex) {
+      dot.classList.add("dot_selected");
+    } else {
+      dot.classList.remove("dot_selected");
+    }
+  });
+  console.log(defaultIndex);
+}
 
 arrowLeft.addEventListener("click", (e) => {
-  console.log("clicL");
+  defaultIndex--;
+  dotUpdate(defaultIndex);
 });
 
 arrowRight.addEventListener("click", (e) => {
-  console.log("clicR");
+  defaultIndex++;
+  dotUpdate(defaultIndex);
 });

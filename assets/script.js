@@ -21,6 +21,7 @@ const slides = [
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
 const allDots = document.querySelectorAll(".dot");
+const bannerImg = document.querySelector(".banner-img");
 
 let defaultIndex = 0;
 
@@ -36,12 +37,25 @@ function dotUpdate() {
   console.log(defaultIndex);
 }
 
+// Function to update the banner images and text
+function carouselUpdate() {
+  // Update img
+  const selectImg = `assets/images/slideshow/${slides[defaultIndex].image}`;
+  bannerImg.src = selectImg;
+
+  // Update text
+  const selectTxt = slides[defaultIndex].tagLine;
+  document.querySelector("p").innerHTML = selectTxt;
+}
+
 arrowLeft.addEventListener("click", (e) => {
   defaultIndex--;
+  carouselUpdate(defaultIndex);
   dotUpdate(defaultIndex);
 });
 
 arrowRight.addEventListener("click", (e) => {
   defaultIndex++;
+  carouselUpdate(defaultIndex);
   dotUpdate(defaultIndex);
 });

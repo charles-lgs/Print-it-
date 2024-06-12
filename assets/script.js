@@ -34,11 +34,17 @@ function dotUpdate() {
       dot.classList.remove("dot_selected");
     }
   });
-  console.log(defaultIndex);
 }
 
 // Function to update the banner images and text
-function carouselUpdate() {
+function carouselUpdate(index, direction) {
+  // Condition for the carousel to be infinite
+  if (defaultIndex === -1 && direction === "left") {
+    defaultIndex = slides.length - 1;
+  } else if (defaultIndex === slides.length && direction === "right") {
+    defaultIndex = 0;
+  }
+
   // Update img
   const selectImg = `assets/images/slideshow/${slides[defaultIndex].image}`;
   bannerImg.src = selectImg;
@@ -48,14 +54,16 @@ function carouselUpdate() {
   document.querySelector("p").innerHTML = selectTxt;
 }
 
+// Click event arrow left
 arrowLeft.addEventListener("click", (e) => {
   defaultIndex--;
-  carouselUpdate(defaultIndex);
+  carouselUpdate(defaultIndex, "left");
   dotUpdate(defaultIndex);
 });
 
+// Click event arrow right
 arrowRight.addEventListener("click", (e) => {
   defaultIndex++;
-  carouselUpdate(defaultIndex);
+  carouselUpdate(defaultIndex, "right");
   dotUpdate(defaultIndex);
 });
